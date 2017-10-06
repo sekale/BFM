@@ -1,0 +1,52 @@
+# //  Questa Sim-64
+# //  Version 10.3b linux_x86_64 May 29 2014
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading project apb_bfm_v1
+# Compile of apbPackage.sv was successful.
+# Compile of apbTasks.sv was successful.
+# Compile of apbTb.sv was successful.
+# Compile of definesPkg.sv was successful.
+# Compile of apb_slave.sv was successful.
+# 5 compiles, 0 failed with no errors.
+run test
+# No Design Loaded!
+vsim test
+# vsim 
+# Start time: 01:56:47 on Oct 06,2017
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading sv_std.std
+# Loading work.definesPkg(fast)
+# Loading work.apbTb_sv_unit(fast)
+# Loading work.test(fast)
+# Loading work.apb_if(fast__1)
+# ** Warning: (vsim-3838) /home/ecegridfs/a/mg310/Desktop/sid/apbBFM/apbTb.sv(97): Variable '/test/apbBus/PRDATA' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See apbTasks.sv(10). 
+#         Region: /test
+add wave -r sim:/apbTb_sv_unit/*
+# (vish-4014) No objects found matching '/apbTb_sv_unit/*'.
+run 3000ns
+# ** Error: Assertion error.
+#    Time: 1325 ns  Scope: test File: /home/ecegridfs/a/mg310/Desktop/sid/apbBFM/apbTb.sv Line: 145
+add wave sim:/test/apbBus/*
+restart -r
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.definesPkg(fast)
+# Loading work.apbTb_sv_unit(fast)
+# Loading work.test(fast)
+# Loading work.apb_if(fast__1)
+# ** Warning: (vsim-3838) /home/ecegridfs/a/mg310/Desktop/sid/apbBFM/apbTb.sv(97): Variable '/test/apbBus/PRDATA' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See apbTasks.sv(10). 
+#         Region: /test
+run 3000ns
+# ** Error: Assertion error.
+#    Time: 1325 ns  Scope: test File: /home/ecegridfs/a/mg310/Desktop/sid/apbBFM/apbTb.sv Line: 145
+# End time: 01:59:24 on Oct 06,2017, Elapsed time: 0:02:37
+# Errors: 1, Warnings: 2
