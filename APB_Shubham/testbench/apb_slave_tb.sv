@@ -1,4 +1,4 @@
-`include "apbTasks.vh"
+`include "apb_if.vh"
 `include "definesPkg.vh"
 import definesPkg::* ;				// Wildcard Import
 
@@ -15,15 +15,7 @@ module apb_slave_tb;
 
 	apb_if apbBus(.apbClk(pclk), .rst(rstN));
 
-	apb_slave   DUT( .clk(pclk),
-  					.rst_n(rstN),
-  					.paddr(apbBus.PADDR),
-  					.pwrite(apbBus.PWRITE),
-  					.psel(apbBus.PSEL),
-  					.penable(apbBus.PENABLE),
-  					.pwdata(apbBus.PWDATA),
-  					.prdata(apbBus.PRDATA)
-				);
+	apb_slave   DUT(pclk, rstN, apbBus);
 
 	//typedef virtual apb_if #(32, 32).tb apbTb;
 	//apbTb apbMaster;
