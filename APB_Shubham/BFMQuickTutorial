@@ -1,0 +1,6 @@
+Explains BFM and how the blocks are connected in concise details. The thing that we do different from them is that our clock is generated in the testbench,
+whereas theirs is used from the BFM. We need to simulate clock in test bench because that's where student write their code and use this BFM just as functions essentially.
+
+This will still give an insight as to how they are created.
+
+https://www.youtube.com/watch?v=53vDSE-CQ3I
