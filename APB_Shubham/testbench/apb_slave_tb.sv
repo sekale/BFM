@@ -48,22 +48,26 @@ module apb_slave_tb;
 		apbBus.idleTicks(100);
 
 		addr = 'h32;
-		data = 'h16;
+		data = 'h10;
 		//call tasks to write first and then read from the DUT
-		apbBus.writeData(2, 16);
-		repeat(5) @(posedge pclk);
-		apbBus.readData(2, rData);
-		repeat(5) @(posedge pclk);
-		apbBus.writeData(4, 32);
-		repeat(5) @(posedge pclk);
-		apbBus.readData(4, rData);
-		repeat(5) @(posedge pclk);
-		apbBus.writeData(8, 16);
-		repeat(5) @(posedge pclk);
-		apbBus.readData(8, rData);
-
-		assert(data == rData) $display("\nWrite then read test passed");
-    assert(data != rData) $display("\nWrite then read test failed");
+		apbBus.writeData(addr, data);
+		repeat(2) @(posedge pclk);
+		apbBus.readData(addr, rData);
+		repeat(2) @(posedge pclk);
+		assert(data == rData) $display("\nWrite then read test 1  passed");
+    assert(data != rData) $display("\nWrite then read test 1 failed");		
+		apbBus.writeData(addr + 4, data + 4);
+		repeat(2) @(posedge pclk);
+		apbBus.readData(addr + 4, rData);
+		repeat(2) @(posedge pclk);
+		assert(data == rData) $display("\nWrite then read test 2 passed");
+    assert(data != rData) $display("\nWrite then read test 2 failed");
+		apbBus.writeData(addr + 8, data + 8);
+		repeat(2) @(posedge pclk);
+		apbBus.readData(addr + 8, rData);
+		repeat(2) @(posedge pclk);
+		assert(data == rData) $display("\nWrite then read test 3 passed");
+    assert(data != rData) $display("\nWrite then read test 3 failed");
     $finish;
 	end
 endmodule

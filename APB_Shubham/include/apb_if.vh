@@ -46,9 +46,9 @@ interface apb_if(apbClk, rst);
 		apbtrans.PENABLE <= 1'b0;
 		apbtrans.PADDR <= addr;
 		apbtrans.PWDATA <= data;
-		@(apbtrans);
+		@(posedge apbClk);
 		apbtrans.PENABLE <= 1'b1;
-		@(apbtrans);
+		@(posedge apbClk);
 		apbtrans.PSEL <= 1'b0;
 		apbtrans.PENABLE <= 1'b0;
 	endtask: writeData
@@ -58,16 +58,19 @@ interface apb_if(apbClk, rst);
 		apbtrans.PWRITE <= 1'b0;
 		apbtrans.PENABLE <= 1'b0;
 		apbtrans.PADDR <= addr;
-		@(apbtrans);
+		@(posedge apbClk);
 		apbtrans.PENABLE <= 1'b1;
-		@(apbtrans);
+		@(posedge apbClk);
+		@(posedge apbClk);
+		
+		@(posedge apbClk);
+		data <= apbtrans.PRDATA;
 		apbtrans.PSEL <= 1'b0;
 		apbtrans.PENABLE <= 1'b0;
-		data = apbtrans.PRDATA;
 	endtask: readData
 
   	task idleTicks (input int tick);
-    		repeat (tick) @(apbtrans);
+    		repeat (tick) @(posedge apbClk);
   	endtask
 
 	task initializeSignals();
@@ -82,7 +85,7 @@ interface apb_if(apbClk, rst);
     		apbtrans.PENABLE <= '0;
     		apbtrans.PWRITE  <= '0;
     		apbtrans.PWDATA  <= '0;
-    		@(apbtrans);
+    		@(posedge apbClk);
   	endtask
 
   	task resetSignals ();
@@ -93,11 +96,11 @@ interface apb_if(apbClk, rst);
 
   	task initialize ();
     		clearSignals();
-    		fork
+    		/*fork
       		forever begin
         		resetSignals();
       		end
-    		join_none
+    		join_none*/
   	endtask
 
 //endclass
